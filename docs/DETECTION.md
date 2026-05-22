@@ -1,118 +1,132 @@
-# BShield Detection in Android
+# Compilation of BShield Security Checks & Detection Mechanisms on Android
 
-This document lists all the detections observed in BShield for Android. The information is accurate as of Feburary 8th, 2026. If you discover additional detections, feel free to report them in the Issues tab.
+This document lists all known BShield security checks and detection mechanisms on Android devices, along with possible bypass methods as of February 8, 2026. If you discover additional detection mechanisms, feel free to report them in the Issues tab.
 
 > [!CAUTION]
-> **This project is for educational purposes only. The intention is to highlight the weaknesses of current security solutions and to encourage the development of better, more reliable alternatives. Use this information responsibly. Do NOT use this for malicious intent. I am not responsible for the actions taken by users of this module or project.**
+> **This project is for educational purposes only. The goal is to highlight weaknesses in current security solutions and encourage the development of better, more reliable alternatives. Use this information responsibly. DO NOT use it for malicious purposes. I am not responsible for any actions taken by users of this module or project.**
 
-**Table of contents:**
+**Table of Contents:**
 
-- [BShield Detection in Android](#bshield-detection-in-android)
-  - [Error Code 1 (Modified App Detection)](#error-code-1-modified-app-detection)
-  - [Error Code 2 (Vitural Machine Detection)](#error-code-2-vitural-machine-detection)
-  - [Error Code 3 (App List Detection)](#error-code-3-app-list-detection)
+- [Compilation of BShield Security Checks \& Detection Mechanisms on Android](#compilation-of-bshield-security-checks--detection-mechanisms-on-android)
+  - [Error Code 1 (Modified Application Detected)](#error-code-1-modified-application-detected)
+  - [Error Code 2 (Virtual Machine / Emulator Detected)](#error-code-2-virtual-machine--emulator-detected)
+  - [Error Code 3 (Application List Detection)](#error-code-3-application-list-detection)
   - [Error Code 4 (Debug Tool Detection, Rare)](#error-code-4-debug-tool-detection-rare)
   - [Error Code 5 (Root Detection)](#error-code-5-root-detection)
-    - [System properties](#system-properties)
-    - [Maps detection](#maps-detection)
-    - [Enforcing status](#enforcing-status)
-    - [Package name detection](#package-name-detection)
-    - [Leaks from custom launchers](#leaks-from-custom-launchers)
-    - [Bootloader check](#bootloader-check)
-    - [Suspicious mount](#suspicious-mount)
-    - [\[UNCONFIRMED\] KSU/AP module image proc loop detection](#unconfirmed-ksuap-module-image-proc-loop-detection)
-  - [Error Code 6 (Unlocked Bootloader Detection, Unused)](#error-code-6-unlocked-bootloader-detection-unused)
-  - [Error Code 7 (App Detection, Rare)](#error-code-7-app-detection-rare)
-  - [Error Code 8 (Privacy Space Like App Detection)](#error-code-8-privacy-space-like-app-detection)
-  - [Error Code 10 (ADB Debug Mode Detection)](#error-code-10-adb-debug-mode-detection)
-  - [Error Code 11 (Developer Mode Detection)](#error-code-11-developer-mode-detection)
+    - [System Properties](#system-properties)
+    - [Injected Memory Map Detection](#injected-memory-map-detection)
+    - [Kernel Enforcing Status](#kernel-enforcing-status)
+    - [Root Manager Package Name Detection](#root-manager-package-name-detection)
+    - [Custom Launcher Modification Module Detection](#custom-launcher-modification-module-detection)
+    - [Bootloader Unlock Check](#bootloader-unlock-check)
+    - [Suspicious Mounts](#suspicious-mounts)
+    - [\[UNCONFIRMED\] KSU/AP Module Proc Image Loop Detection](#unconfirmed-ksuap-module-proc-image-loop-detection)
+  - [Error Code 6 (Unlocked Bootloader Detected) Currently Unused or Possibly Merged into Code 5 Bootloader Check](#error-code-6-unlocked-bootloader-detected-currently-unused-or-possibly-merged-into-code-5-bootloader-check)
+  - [Error Code 7 (Suspicious Application Detected) Rarely Appears](#error-code-7-suspicious-application-detected-rarely-appears)
+  - [Error Code 8 (Application Running in a Different Space Than the Original Device Space)](#error-code-8-application-running-in-a-different-space-than-the-original-device-space)
+  - [Error Code 10 (ADB Debug Mode Detected)](#error-code-10-adb-debug-mode-detected)
+  - [Error Code 11 (Developer Mode Detected)](#error-code-11-developer-mode-detected)
+  - [Error Code 12 (Custom ROM Detected)](#error-code-12-custom-rom-detected)
+  - [Error Code 13 (Accessibility Service Running Detected)](#error-code-13-accessibility-service-running-detected)
+  - [Error Code 14 (Application Installed from Unknown Source Detected)](#error-code-14-application-installed-from-unknown-source-detected)
+  - [Error Code 15 (Malicious Application Detected)](#error-code-15-malicious-application-detected)
+  - [Error Code 16 (Virtual Keyboard Not in Trusted List)](#error-code-16-virtual-keyboard-not-in-trusted-list)
+  - [Error Code 17 (Application Installed in Work Profile)](#error-code-17-application-installed-in-work-profile)
+  - [Error Code 18 (Simulated Input Detected)](#error-code-18-simulated-input-detected)
+  - [Error Code 19 (Proxy Mode Enabled on Device)](#error-code-19-proxy-mode-enabled-on-device)
+  - [Error Code 20 (Application Does Not Support MacOS)](#error-code-20-application-does-not-support-macos)
+  - [Error Code 21 (Possible Root Compromise Detected)](#error-code-21-possible-root-compromise-detected)
+  - [Error Code 22 (System Hook Detected)](#error-code-22-system-hook-detected)
+  - [Error Code 23 (VPN Connection Detected)](#error-code-23-vpn-connection-detected)
 
-## Error Code 1 (Modified App Detection)
+## Error Code 1 (Modified Application Detected)
 
-**Reference link:** <https://vneid.gov.vn/shield-warning?code=1>
+**Reference link:** <https://s.bshield.io/?code=1>
 
-This error occurs when you install unsigned app or modified app. For patch app developers, currently I can't find any ways to make it working. So you can try, but it will be tough to make it working.
+This error occurs when you install an application using BShield protection mechanisms that has not been signed or has been modified. For developers who patched the application, I currently have not found a working method to make it function properly. You may try, but it will be extremely difficult to succeed.
 
-**Workaround:** Remove the modified, unsigned app from your system and install from Google Play.
+**Fix:**  
+Uninstall the modified or unsigned application using BShield protection from your system and reinstall it from Google Play.
 
-## Error Code 2 (Vitural Machine Detection)
+## Error Code 2 (Virtual Machine / Emulator Detected)
 
-**Reference link:** <https://vneid.gov.vn/shield-warning?code=2>
+**Reference link:** <https://s.bshield.io/?code=2>
 
-This error occurs when you install the app in the vitural machine.
+This error occurs when you install the application inside a virtual machine or emulator.
 
-**Workaround:** Don't install the app in the vitural machine (Obviously :v).
+**Fix:**  
+Do not install the application inside a virtual machine or emulator (obviously :v).
 
-## Error Code 3 (App List Detection)
+## Error Code 3 (Application List Detection)
 
-**Reference link:** <https://vneid.gov.vn/shield-warning?code=3>
+**Reference link:** <https://s.bshield.io/?code=3>
 
-This error occurs when you install root manager, suspicious app in your device.
+This error occurs when you install a root manager, suspicious applications, or LSPosed modules on the device.
 
-Below is the list of apps that BShield currently detects (there may be more; these are only the ones confirmed through testing. Feel free to request updates in the Issues tab):
+Below is a list of applications currently detected by BShield (there may be more; these are only the ones confirmed through testing. You can request updates in the Issues tab):
 
 ```txt
 com.topjohnwu.magisk
 com.drdisagree.iconify
-<most of lsposed app>
+<most lsposed modules>
 ```
 
-**Workarounds:**
-You can use a combination such as:
+**Fix:**
+Use the following KSU/Magisk and LSPosed modules (preferably FOSS):
 
 - [ReLSPosed](https://github.com/ThePedroo/ReLSPosed)
 - [HMA-OSS](https://github.com/frknkrc44/HMA-OSS)
 
-to hide these apps.
+to hide these applications.
 
-Or if you don't use root, just don't install the root manager app in your device.
+Or, if you do not use root, simply avoid installing root managers on the device.
 
 ## Error Code 4 (Debug Tool Detection, Rare)
 
-**Reference link:** <https://vneid.gov.vn/shield-warning?code=4>
+**Reference link:** <https://s.bshield.io/?code=4>
 
-This error occurs when you use google's debug tools to run. This won't happen in the production build of the app. If you experience this error, please contact the app developers or let me know.
+This error occurs when running applications protected by BShield using Google's debugging tools. This error does not appear in production builds of the application. If you encounter this issue, contact the application developer or report it to me.
 
 ## Error Code 5 (Root Detection)
 
-**Reference link:** <https://vneid.gov.vn/shield-warning?code=5>
+**Reference link:** <https://s.bshield.io/?code=5>
 
-This is the toughest detection in BSheild when you're using root, it contains a variety of root, system detection. I will list some confirmed detection here:
+This is the hardest BShield detection mechanism to bypass when using rooted devices or devices running custom ROMs. It includes multiple root detection methods and various system property checks. Below are some confirmed mechanisms:
 
-### System properties
+### System Properties
 
-BShield also detects certain Android system properties. Some known examples include:
+BShield detects the following Android system properties (commonly found in AOSP custom ROMs). Known examples include:
 
 - `init.svc.adb_root`
 - `service.adb.root`
 
-**Workaround:**  
-These properties can be hidden easily by overriding them, for example:
+**Fix:**
+These properties can be fixed by overriding them, for example:
 
 ```sh
 resetprop -n -p init.svc.adb_root ""
 resetprop -n -p service.adb.root ""
 ```
 
-**Note:** These properties will reset on reboot. You can use my example module in Release tab as a fix for every reboot
+**Note:** These properties will revert after reboot. You can use my module from the Releases tab to automatically apply the fix after each boot.
 
-### Maps detection
+### Injected Memory Map Detection
 
-BShield can also detect whether the memory maps contain traces of injection-related entries.  
+BShield detects whether memory maps have been injected.
 
-You can verify this using the **Native Detector** tool ([download](https://github.com/reveny/Android-Native-Root-Detector/releases/latest)).
+You can check this using the **Native Detector** tool ([download here](https://github.com/reveny/Android-Native-Root-Detector/releases/latest)).
 
-For example, it may report "Injection Detection".
+For example, it may report an "Injection Detection" error.
 
-**Here is some Workaround:**
+**Some possible fixes:**
 
-- If your kernel supports KernelSU + SuSFS (with SUS_MAP enabled), you can add the leaked map paths to the SuSFS map list.
-- If you're using font module, it may also leak map entries. Remove it or add its paths to SUS_MAP as mentioned above.
-- You can also try Pedro's TreatWheel module to hide maps, but its effectiveness is limited and it requires a ReZygisk build to operate.
+- If your kernel supports KernelSU + SuSFS (with SUS_MAP enabled), you can add the detected injected memory map paths to the SuSFS map list (SUS_MAP).
+- If you use a font replacement module, it may also cause injected memory maps. Remove it or add its paths to SUS_MAP as mentioned above.
+- You may also try Pedro's TreatWheel module to hide injected memory maps, though its effectiveness is limited compared to SUS_MAP and it requires ReZygisk.
 
-**A note about /system/framework/framework-res.apk maps detection.**
+**Note regarding `/system/framework/framework-res.apk` memory map detection**
 
-You may notice that in the **Native Detector** tool, it shows **Found Injection**, and the results look something like this:
+You may see **Found Injection** in **Native Detector**, with results similar to:
 
 ```txt
 7982fef000-7983031000 r--s 00000000 fd:00 1549 /system/framework/framework-res.apk
@@ -128,25 +142,21 @@ You may notice that in the **Native Detector** tool, it shows **Found Injection*
 79929ef000-79929f0000 r--s 00000000 fd:27 500  /system/framework/framework-res.apk
 ```
 
-This happens because your custom kernel likely contains the LineageOS file-hiding patch in task_mmu.c. See: [reference commit (MoonWake@bea4fe4)](https://github.com/RainyXeon/moonwake_kernel_xiaomi_ruby/commit/bea4fe4ecfa41edb52f26ce9254a16643dda57ea).
+This happens because your custom kernel may contain a patch that hides LineageOS files in `task_mmu.c`. See [reference commit (MoonWake@bea4fe4)](https://github.com/RainyXeon/moonwake_kernel_xiaomi_ruby/commit/bea4fe4ecfa41edb52f26ce9254a16643dda57ea).
 
-The purpose of this LineageOS file-hiding patch is to replace real LineageOS file paths with `framework-res.apk`.
+The purpose of this patch is to replace actual LineageOS file paths with `framework-res.apk`. If a VMA-mapped file contains `lineage` in its name, then `/proc/<pid>/map_files/<start>-<end>` points to `framework-res.apk` instead of the real file to avoid root detection tools.
 
-Basically, if a file mapped by a VMA contains lineage in its filename, then `/proc/<pid>/map_files/<start>-<end>` will point to `framework-res.apk` instead of the actual file. This prevents tools like MagiskDetector, root-checkers, app integrity scanners, MDM systems, etc., from detecting LineageOS files in memory maps.
+However, this mechanism is now outdated and unintentionally triggers **Found Injection** in **Native Detector**, because the fake VMA header can still be detected. This may happen because only the file path is replaced instead of the entire VMA metadata.
 
-The main idea for this LineageOS file hiding commit is to replace real file paths from LineageOS with `framework-res.apk`. Basically, if the file mapped by a VMA contains `lineage` in its filename, Then `/proc/<pid>/map_files/<start>-<end>` will point to `framework-res.apk`, not the real file. Tools like MagiskDetector, root-checkers, app integrity scanners, MDM systems, etc. cannot see LineageOS files in memory maps.
+If you are a custom kernel developer, you can revert the commit containing the LineageOS file hiding code. If you are a user, there is nothing you can do unless you change kernels or ask the kernel developer to modify it.
 
-However, this hiding mechanism is outdated and unintentionally triggers **Found Injection** in **Native Detector**, because the fake VMA header is still detectable. This happens because the patch only replaces the file path, not the entire VMA metadata before that path (which is likely why BShield is able to detect it, in my opinion).
+### Kernel Enforcing Status
 
-If you are a custom kernel developer, you can revert the commit that contains the LineageOS file-hiding code mentioned above. If you are a user, there is nothing you can do unless you replace the kernel or ask the developer to do so.
+This is a common detection method. Using ROMs with **SELinux permissive** is not recommended, as they are considered insecure by modern standards.
 
-### Enforcing status
+BShield requires **SELinux** to be in **Enforcing** mode to function properly.
 
-This is a common detection used by many applications. It is strongly recommended **not** to use a custom ROM with **permissive SELinux**, as it is considered insecure by modern standards.
-
-If your ROM is running with **permissive SELinux**, certain attacks may be possible. BShield requires **SELinux** to be set to **Enforced** to function properly.
-
-**Workaround:**
+**Fix:**
 
 - Set SELinux to **Enforcing**
 
@@ -154,13 +164,13 @@ If your ROM is running with **permissive SELinux**, certain attacks may be possi
 setenforce 1
 ```
 
-- Use a kernel or ROM with **Enforcing SELinux**
+- Use a kernel or ROM with **SELinux Enforcing**
 
-### Package name detection
+### Root Manager Package Name Detection
 
-Another classic detection used by many applications, BShield checks the installed app list to identify apps commonly associated with root access. The original detection is from [error code 3](#error-code-3-app-list-detection), but for some reason, app like `me.bmax.apatch` or `com.rifsxd.ksunext` will trigger code 5 not 3. I believe this is the temporary Workaround of them to detect advanced root solution like KernelSU
+BShield checks the installed application list for applications commonly associated with root or considered suspicious, similar to [Error Code 3](#error-code-3-application-list-detection). However, for some reason, apps like `me.bmax.apatch` or `com.rifsxd.ksunext` trigger Error Code 5 instead of 3.
 
-Below is the list of apps that BShield currently detects (there may be more; these are only the ones confirmed through testing. Feel free to request updates in the Issues tab):
+Detected applications:
 
 ```txt
 com.topjohnwu.magisk
@@ -170,112 +180,226 @@ me.bmax.apatch
 me.weishu.kernelsu
 ```
 
-**Workaround:**
-You can use a combination such as:
+**Fix:**
+Use the following KSU/Magisk and LSPosed modules (preferably FOSS):
 
 - [ReLSPosed](https://github.com/ThePedroo/ReLSPosed)
 - [HMA-OSS](https://github.com/frknkrc44/HMA-OSS)
 
-to hide these apps.
+to hide these applications.
 
-### Leaks from custom launchers
+### Custom Launcher Modification Module Detection
 
-BShield can detect many custom launcher modules, possibly through mounts, memory maps, or other indicators.
+BShield may detect many custom launcher modification modules, possibly through mounts, memory maps, or other indicators.
 
-**Workaround:**  
-The simplest approach is to remove custom launchers and use the default system launcher. Alternatively, using standard app launchers typically does not trigger detection.
+**Fix:**
+The easiest method is to remove the custom launcher and use the system default launcher, or use a standard launcher from the Play Store.
 
-### Bootloader check
+### Bootloader Unlock Check
 
-I can confirm that Bshield is checking bootloader in the early 2026. Note is it only check of locking status and aosp keybox, revoked attestation key can still usable for now.
+I can confirm that BShield checked bootloader status in early 2026. It only checks the lock status, and AOSP keyboxes or revoked keyboxes currently still work.
 
-**Workaround:**
-Install [JingMatrix/TEESimulator](https://github.com/JingMatrix/TEESimulator), put the package name into target.txt file like this:
+**Fix:**
+Install [JingMatrix/TEESimulator](https://github.com/JingMatrix/TEESimulator), then add the package name to `target.txt`:
 
 ```txt
 com.vnid
 ```
 
-### Suspicious mount
+### Suspicious Mounts
 
-For a long time, BShield check for mount as a way to detect root. This happen when you install some modules like font changing or launcher.
+BShield has long checked mounts to detect root. This occurs when modules use mount mechanisms to modify system files.
 
-You can verify this using the **Native Detector** tool ([download](https://github.com/reveny/Android-Native-Root-Detector/releases/latest)).
+You can check this using **Native Detector**.
 
 For example, it may report "Suspicious Mount".
 
-**Workaround:**
+**Fix:**
 
-- If you check your module zip file contains `mount --bind`, be careful, it may trigger this error code, ask your dev to [use this method instead](https://kernelsu.org/guide/module.html).
-- KSU 3.0 and some recent version of APatch, Magisk can handle this carefully so you don't meet this detection most of the time.
-- In some device, ReZygisk can't unmount some path weirdly. Tell me if you still meet that issue!
+- If the module ZIP contains `mount --bind`, be careful because it may trigger this error. Ask the developer to use [this alternative method](https://kernelsu.org/guide/module.html).
+- KSU 3.0 and some newer versions of APatch and Magisk handle this issue better.
+- On some devices, ReZygisk cannot unmount certain paths. If you encounter this issue, report it to me.
 
-### [UNCONFIRMED] KSU/AP module image proc loop detection
+### [UNCONFIRMED] KSU/AP Module Proc Image Loop Detection
 
-In the recent reports from [@Hzzmonet](https://t.me/Hzzmonet), BShield also detect if the KSU/AP module image proc loop. This because in older KSU/AP, it use OverlayFS to operate, which cause detection.
+According to a recent report from [@Hzzmonet](https://t.me/Hzzmonet), BShield may detect KSU/AP proc image loops. The reason is that older KSU/AP versions used OverlayFS mount mechanisms, leading to detection.
 
-You can verify this using the **Native Detector** tool ([download](https://dl.reveny.me/)).
+You can check this using **Native Detector**.
 
-For example, it may report "KSU/AP loop" or something similar like that.
+For example, it may report "KSU/AP loop".
 
-**Workaround:**
+**Fix:**
 
-- If you're in original or older KernelSU, please use Pedro's TreatWheel module to hide those.
-- If you're in KernelSU-Next, please disable the `Use OverlayFS` switch in settings tab. You have to backup your module before operate.
+- If you use the original KernelSU and older versions, use Pedro's TreatWheel module + ReZygisk to hide it.
+- If you use older KernelSU-Next versions, disable the Use OverlayFS option in settings. Remember to back up modules beforehand because all modules will be removed.
+- Newer original KSU v3 forks and recent APatch versions have already fixed this issue.
 
-## Error Code 6 (Unlocked Bootloader Detection, Unused)
+## Error Code 6 (Unlocked Bootloader Detected) Currently Unused or Possibly Merged into Code 5 Bootloader Check
 
-**Reference link:** <https://vneid.gov.vn/shield-warning?code=6>
+**Reference link:** <https://s.bshield.io/?code=6>
 
-This error occurs when you have unlocked bootloader. This kind of deteciton is not avaliable in most of BShield powered app. But if it's avaliable in the future, may see the Workaround below.
+This error occurs when the bootloader is unlocked. Currently, most applications using BShield have not enabled this detection. If it becomes active in the future, you can refer to the workaround below.
 
-**Workaround:**
-
-Install [JingMatrix/TEESimulator](https://github.com/JingMatrix/TEESimulator), put the package name into target.txt file like this:
+**Fix:**
+Install [JingMatrix/TEESimulator](https://github.com/JingMatrix/TEESimulator), then add the package name to `target.txt`:
 
 ```txt
 com.vnid
 ```
 
-## Error Code 7 (App Detection, Rare)
+## Error Code 7 (Suspicious Application Detected) Rarely Appears
 
-**Reference link:** <https://vneid.gov.vn/shield-warning?code=7>
+**Reference link:** <https://s.bshield.io/?code=7>
 
-This error occurs when you have some suspicious app in your device. We don't experience this detection and it's rare to see that.
+This error occurs when suspicious applications exist in the installed app list. Rarely encountered in practice.
 
-**Workaround:** same as [error code 3](#error-code-3-app-list-detection).
+**Fix:**
+Same as [Error Code 3](#error-code-3-application-list-detection).
 
-## Error Code 8 (Privacy Space Like App Detection)
+## Error Code 8 (Application Running in a Different Space Than the Original Device Space)
 
-**Reference link:** <https://vneid.gov.vn/shield-warning?code=8>
+**Reference link:** <https://s.bshield.io/?code=8>
 
-This error occurs when you use the app inside an emulator or privacy space like app.
+This error occurs when using applications protected by BShield inside private spaces or secondary spaces instead of the device's original user space.
 
-**Workaround:** don't use the app inside a third party app
+**Fix:**
+Do not run the application inside third-party space/container applications.
 
-## Error Code 10 (ADB Debug Mode Detection)
+## Error Code 10 (ADB Debug Mode Detected)
 
-**Reference link:** <https://vneid.gov.vn/shield-warning?code=10>
+**Reference link:** <https://s.bshield.io/?code=10>
 
-This error occurs when you use ADB debug mode in your device.
+This error occurs when ADB debugging is enabled on the device.
 
-**Workarounds:**
-
-Safe practice, don't enable ADB debug mode when you don't use it.
-
-## Error Code 11 (Developer Mode Detection)
-
-**Reference link:** <https://vneid.gov.vn/shield-warning?code=11>
-
-This error occurs when you use Developer Mode in your device.
-
-**Workarounds:**
-
-You can use a combination such as:
+**Fix:**
+Use the following KSU/Magisk and LSPosed modules (preferably FOSS):
 
 - [ReLSPosed](https://github.com/ThePedroo/ReLSPosed)
-- [ImNotADeveloper](https://github.com/notyour777/ImNotADeveloper)
+- [HMA-OSS](https://github.com/frknkrc44/HMA-OSS)
 
-to hide developer mode, ADB debug mode
+to hide ADB debugging.
 
-Or better practice, don't enable Developer Mode when you don't use it.
+## Error Code 11 (Developer Mode Detected)
+
+**Reference link:** <https://s.bshield.io/?code=11>
+
+This error occurs when Developer Mode is enabled on the device.
+
+**Fix:**
+Use the following KSU/Magisk and LSPosed modules (preferably FOSS):
+
+- [ReLSPosed](https://github.com/ThePedroo/ReLSPosed)
+- [HMA-OSS](https://github.com/frknkrc44/HMA-OSS)
+
+to hide Developer Mode and ADB debugging.
+
+Or preferably, simply disable Developer Mode when not needed.
+
+## Error Code 12 (Custom ROM Detected)
+
+**Reference link:** <https://s.bshield.io/?code=12>
+
+This error occurs when using a custom ROM on the device.
+
+Currently, only the FPT Shop app additionally checks this (<https://play.google.com/store/apps/details?id=vn.frt.fptshop.app&hl=vi>)
+
+**Fix:**
+Install [JingMatrix/TEESimulator](https://github.com/JingMatrix/TEESimulator), then add the package name to `target.txt`.
+
+## Error Code 13 (Accessibility Service Running Detected)
+
+**Reference link:** <https://s.bshield.io/?code=13>
+
+This error occurs when using applications that rely on accessibility services.
+
+**Fix:**
+Install [Nitsuya/DoNotTryAccessibility](https://github.com/Nitsuya/DoNotTryAccessibility), open LSPosed, then configure the DoNotTryAccessibility module to hook into `System Framework`.
+
+## Error Code 14 (Application Installed from Unknown Source Detected)
+
+**Reference link:** <https://s.bshield.io/?code=14>
+
+**Fix:**
+
+Install the app from Google Play Store or Aurora Store.
+
+You may also try enabling `Spoof Installation Source` in `HMA-OSS`.
+
+## Error Code 15 (Malicious Application Detected)
+
+**Reference link:** <https://s.bshield.io/?code=15>
+
+This error occurs when applications with malicious indicators are present on the device.
+
+**Fix:**
+We recommend reviewing your installed applications. If you do not want to uninstall the app and only want to bypass this error, refer to [Error Code 3 (Application List Detection)](#error-code-3-application-list-detection).
+
+## Error Code 16 (Virtual Keyboard Not in Trusted List)
+
+**Reference link:** <https://s.bshield.io/?code=16>
+
+This error occurs when using third-party keyboard applications that are not in BShield's trusted list.
+
+**Fix:**
+We recommend using keyboards from trusted publishers, such as GBoard from Google.
+
+## Error Code 17 (Application Installed in Work Profile)
+
+**Reference link:** <https://s.bshield.io/?code=17>
+
+This error occurs when the application is installed inside a work profile.
+
+**Fix:**
+Reinstall the application outside the work profile.  
+Currently, there is no known method to hide this feature.
+
+## Error Code 18 (Simulated Input Detected)
+
+**Reference link:** <https://s.bshield.io/?code=18>
+
+This error occurs when using simulated input for the application.
+
+**Fix:**
+We recommend avoiding autoclickers or any applications/software that simulate input (such as keyboard simulation) within this application.
+
+## Error Code 19 (Proxy Mode Enabled on Device)
+
+**Reference link:** <https://s.bshield.io/?code=19>
+
+This error occurs when using a proxy configured in the Wi-Fi SSID settings.
+
+**Fix:**
+We recommend temporarily disabling the proxy, or preferably not using one at all.
+
+## Error Code 20 (Application Does Not Support MacOS)
+
+**Reference link:** <https://s.bshield.io/?code=20>
+
+This is a special error code related to using iPhone virtualization environments on MacOS systems.
+
+Currently, this error rarely appears, but if it does, it indicates that you should not use this application inside iPhone virtualization environments.
+
+## Error Code 21 (Possible Root Compromise Detected)
+
+**Reference link:** <https://s.bshield.io/?code=21>
+
+Based on current findings, this error works identically to Error Code 5.  
+You can read more [by clicking here](#error-code-5-root-detection)
+
+## Error Code 22 (System Hook Detected)
+
+**Reference link:** <https://s.bshield.io/?code=22>
+
+This error occurs when using hooking modules such as LSPosed or Xposed.
+
+**Fix:**
+Use the official LSPosed 2.0 release (<https://lsposed.zip>) or LSPosed forks such as Irena, IrenaX, or Vector.
+
+## Error Code 23 (VPN Connection Detected)
+
+**Reference link:** <https://s.bshield.io/?code=23>
+
+This error occurs when connected to a VPN.
+
+**Fix:**
+Install [RuslanUC/NoVPNDetect](https://github.com/RuslanUC/NoVPNDetect), open LSPosed, then configure the NoVPNDetect module to hook into the application detecting the VPN.
