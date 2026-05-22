@@ -26,10 +26,11 @@ Tài liệu này liệt kê tất cả các cơ chế kiểm tra, phát hiện l
   - [Mã lỗi 8 (Phát hiện ứng dụng dạng Privacy Space)](#mã-lỗi-8-phát-hiện-ứng-dụng-dạng-privacy-space)
   - [Mã lỗi 10 (Phát hiện chế độ debug ADB)](#mã-lỗi-10-phát-hiện-chế-độ-debug-adb)
   - [Mã lỗi 11 (Phát hiện chế độ nhà phát triển)](#mã-lỗi-11-phát-hiện-chế-độ-nhà-phát-triển)
+  - [Mã lỗi 12 (Phát hiện thiết bị đang sử dụng ROM tùy chỉnh)](#mã-lỗi-12-phát-hiện-thiết-bị-đang-sử-dụng-ROM-tùy-chỉnh)
 
 ## Mã lỗi 1 (Phát hiện ứng dụng đã bị chỉnh sửa)
 
-**Link tham khảo:** <https://vneid.gov.vn/shield-warning?code=1>
+**Link tham khảo:** <https://s.bshield.io/?code=1>
 
 Lỗi này xảy ra khi bạn cài đặt ứng dụng dùng cơ chế kiểm tra của BShield mà chưa được ký hoặc đã bị chỉnh sửa. Đối với các nhà phát triển đã patch ứng dụng , hiện tại tôi không tìm ra cách nào để làm cho nó hoạt động. Bạn có thể thử, nhưng sẽ rất khó để thành công.
 
@@ -38,7 +39,7 @@ Gỡ bỏ ứng dụng dùng cơ chế kiểm tra của BShield đã bị chỉn
 
 ## Mã lỗi 2 (Phát hiện cài đặt trên máy ảo, giả lập)
 
-**Link tham khảo:** <https://vneid.gov.vn/shield-warning?code=2>
+**Link tham khảo:** <https://s.bshield.io/?code=2>
 
 Lỗi này xảy ra khi bạn cài đặt ứng dụng trong máy ảo, giả lập.
 
@@ -47,7 +48,7 @@ Không cài đặt ứng dụng trong máy ảo, giả lập (hiển nhiên :v).
 
 ## Mã lỗi 3 (Phát hiện danh sách ứng dụng)
 
-**Link tham khảo:** <https://vneid.gov.vn/shield-warning?code=3>
+**Link tham khảo:** <https://s.bshield.io/?code=3>
 
 Lỗi này xảy ra khi bạn cài đặt trình quản lý root hoặc các ứng dụng đáng ngờ, module lsposed trên thiết bị.
 
@@ -71,13 +72,13 @@ Hoặc nếu bạn không dùng root, đơn giản là đừng cài đặt trìn
 
 ## Mã lỗi 4 (Phát hiện công cụ debug, hiếm)
 
-**Link tham khảo:** [https://vneid.gov.vn/shield-warning?code=4](https://vneid.gov.vn/shield-warning?code=4)
+**Link tham khảo:** <https://s.bshield.io/?code=4>
 
 Lỗi này xảy ra khi bạn chạy ứng dụng dùng cơ chế kiểm tra của BShield bằng các công cụ debug của Google. Lỗi này sẽ không xuất hiện trong bản build production của ứng dụng. Nếu bạn gặp lỗi này, hãy liên hệ với nhà phát triển ứng dụng hoặc báo cho tôi biết.
 
 ## Mã lỗi 5 (Phát hiện root)
 
-**Link tham khảo:** [https://vneid.gov.vn/shield-warning?code=5](https://vneid.gov.vn/shield-warning?code=5)
+**Link tham khảo:** <https://s.bshield.io/?code=5>
 
 Đây là cơ chế phát hiện khó vượt qua nhất của BShield khi bạn sử dụng trên thiết bị đã root hoặc thiết bị chạy custom rom, bao gồm nhiều dạng phát hiện root và các đặc tính hệ thống khác nhau. Dưới đây là một số cơ chế đã được xác nhận:
 
@@ -224,7 +225,7 @@ Ví dụ, nó sẽ báo "KSU/AP loop".
 
 ## Mã lỗi 6 (Phát hiện bootloader mở khóa) hiện tại không sử dụng hoặc có thể đã đưa vào chung code 5 mục Kiểm tra bootloader
 
-**Link tham khảo:** [https://vneid.gov.vn/shield-warning?code=6](https://vneid.gov.vn/shield-warning?code=6)
+**Link tham khảo:** <https://s.bshield.io/?code=6>
 
 Lỗi này xảy ra khi bootloader bị mở khóa. Hiện tại hầu hết các ứng dụng dùng BShield chưa kích hoạt phát hiện này. Nếu trong tương lai có dùng, bạn có thể tham khảo cách khắc phục bên dưới.
 
@@ -237,7 +238,7 @@ com.vnid
 
 ## Mã lỗi 7 (Phát hiện ứng dụng đáng ngờ) hiếm khi xuất hiện
 
-**Link tham khảo:** [https://vneid.gov.vn/shield-warning?code=7](https://vneid.gov.vn/shield-warning?code=7)
+**Link tham khảo:** <https://s.bshield.io/?code=7>
 
 Lỗi này xảy ra khi danh sách ứng dụng có ứng dụng đáng ngờ trên thiết bị. Hiếm khi gặp trong thực tế.
 
@@ -246,7 +247,7 @@ Giống [mã lỗi 3](#mã-lỗi-3-phát-hiện-danh-sách-ứng-dụng).
 
 ## Mã lỗi 8 (Phát hiện ứng dụng đang được chạy ở chế độ không gian khác khác với không gian gốc của máy)
 
-**Link tham khảo:** [https://vneid.gov.vn/shield-warning?code=8](https://vneid.gov.vn/shield-warning?code=8)
+**Link tham khảo:** <https://s.bshield.io/?code=8>
 
 Lỗi này xảy ra khi bạn sử dụng ứng dụng dùng cơ chế kiểm tra của BShield trong không gian riêng tư, không gian thứ 2 khác với không gian gốc của máy.
 
@@ -255,7 +256,7 @@ Không sử dụng ứng dụng bên trong app của bên thứ ba.
 
 ## Mã lỗi 10 (Phát hiện chế độ debug ADB)
 
-**Link tham khảo:** [https://vneid.gov.vn/shield-warning?code=10](https://vneid.gov.vn/shield-warning?code=10)
+**Link tham khảo:** <https://s.bshield.io/?code=10>
 
 Lỗi này xảy ra khi bạn bật chế độ debug ADB trên thiết bị.
 
@@ -269,7 +270,7 @@ Bạn hãy sử dụng module KSU/Magisk và module LSposed dưới đây (ưu t
 
 ## Mã lỗi 11 (Phát hiện chế độ nhà phát triển)
 
-**Link tham khảo:** [https://vneid.gov.vn/shield-warning?code=11](https://vneid.gov.vn/shield-warning?code=11)
+**Link tham khảo:** <https://s.bshield.io/?code=11>
 
 Lỗi này xảy ra khi bạn bật Developer Mode trên thiết bị.
 
@@ -285,7 +286,7 @@ Hoặc cách tốt nhất: không bật Developer Mode khi không sử dụng.
 
 ## Mã lỗi 12 (Phát hiện thiết bị đang sử dụng ROM tùy chỉnh)
 
-**Link tham khảo:** [https://exits-bshield-mvno.fptshop.com.vn/?code=12](https://exits-bshield-mvno.fptshop.com.vn/?code=12)
+**Link tham khảo:** <https://s.bshield.io/?code=12>
 
 Lỗi này xảy ra khi bạn dùng ROM custom trên thiết bị.
 
@@ -293,3 +294,84 @@ Hiện tại chỉ mới có duy nhất app FPT Shop là check thêm cái này (
 
 **Cách khắc phục:**
 Cài đặt [JingMatrix/TEESimulator](https://github.com/JingMatrix/TEESimulator), thêm tên gói vào `target.txt`:
+
+## Mã lỗi 13 (Phát hiện thiết bị đang chạy dịch vụ trợ năng đang chạy)
+
+**Link tham khảo:** <https://s.bshield.io/?code=13>
+
+Lỗi này xảy ra khi bạn dùng ứng dụng dùng dịch vụ trợ năng trên thiết bị.
+
+**Cách khắc phục:**
+Cài đặt [Nitsuya/DoNotTryAccessibility](https://github.com/Nitsuya/DoNotTryAccessibility), mở LSPosed và vào module DoNotTryAccessibility chọn hook vào `System Framework` 
+
+## Mã lỗi 14 (Phát hiện ứng dụng cài từ nguồn không xác định)
+
+**Link tham khảo:** <https://s.bshield.io/?code=14>
+
+**Cách khắc phục:**
+Cài đặt app từ Google Play Store hoặc Aurora Store
+
+## Mã lỗi 15 (Phát hiện ứng dụng độc hại)
+
+Lỗi này xảy ra khi bạn dùng ứng dụng dùng có dấu hiệu độc hại trên thiết bị.
+
+**Link tham khảo:** <https://s.bshield.io/?code=15>
+**Cách khắc phục:**
+Tôi khuyên bạn nên rà soát lại ứng dụng đã cài đặt, nếu bạn muốn không gỡ ứng dụng mà chỉ muốn pass mã lỗi này thì xem lại Mã lỗi 3 (Phát hiện danh sách ứng dụng)
+
+## Mã lỗi 16 (Bàn phím ảo không trong danh sách tin cậy)
+
+Lỗi này xảy ra khi bạn dùng ứng dụng bàn phím bên thứ 3 không nằm trong danh sách tin cậy của BShield
+
+**Link tham khảo:** <https://s.bshield.io/?code=16>
+**Cách khắc phục:**
+Tôi khuyên bạn nên dùng bàn phím đến từ nhà phát hành tin cậy như GBoard từ Google
+
+## Mã lỗi 17 (Ứng dụng cài trong hồ sơ công việc)
+
+Lỗi này xảy ra khi bạn cài ứng dụng trong hồ sơ công việc
+
+**Link tham khảo:** <https://s.bshield.io/?code=17>
+**Cách khắc phục:**
+Cài đặt lại ứng dụng ngoài hồ sơ công việc
+
+## Mã lỗi 18 (Đang dùng nhập liệu mô phỏng)
+
+Lỗi này xảy ra khi bạn dùng nhập liệu mô phỏng cho ứng dụng
+
+**Link tham khảo:** <https://s.bshield.io/?code=18>
+**Cách khắc phục:**
+Đừng dùng nhập liệu mô phỏng bruh
+
+## Mã lỗi 19 (Đang dùng chế độ proxy trên thiết bị)
+
+Lỗi này xảy ra khi bạn đang dùng proxy trong cài đặt SSID trong cài đặt Wi-fi
+
+**Link tham khảo:** <https://s.bshield.io/?code=19>
+**Cách khắc phục:**
+Tạm tắt proxy hoặc tốt nhất là không dùng
+
+## Mã lỗi 20 (Ứng dụng không hỗ trợ hệ điều hành MacOS)
+
+LMAO
+**Link tham khảo:** <https://s.bshield.io/?code=20>
+
+## Mã lỗi 21 (Phát hiện có vẻ đã bị bẻ khóa (root))
+Xem Mã lỗi 5 (Phát hiện root)
+**Link tham khảo:** <https://s.bshield.io/?code=21>
+
+## Mã lỗi 22 (Thiết bị của bạn có vẻ đã bị can thiệp hệ thống (hook))
+
+Lỗi này xảy ra khi bạn dùng module để hook (LSposed, Xposed)
+
+**Link tham khảo:** <https://s.bshield.io/?code=22>
+**Cách khắc phục:**
+Sử dụng bản LSPosed 2.0 chính thức (https://lsposed.zip) hoặc các bản fork của LSPosed như (Irena, IrenaX, Vector)
+
+## Mã lỗi 23 (hiết bị đang kết nối VPN)
+
+Lỗi này xảy ra khi bạn đang kết nối đến VPN
+
+**Link tham khảo:** <https://s.bshield.io/?code=23>
+**Cách khắc phục:**
+Cài đặt [RuslanUC/NoVPNDetect](https://github.com/RuslanUC/NoVPNDetect), mở LSPosed và vào module NoVPNDetect chọn hook vào app đang detect VPN
