@@ -359,6 +359,7 @@ Tạm tắt proxy hoặc tốt nhất là không dùng
 ## Mã lỗi 20 (Ứng dụng không hỗ trợ hệ điều hành MacOS)
 
 LMAO
+
 **Link tham khảo:** <https://s.bshield.io/?code=20>
 
 ## Mã lỗi 21 (Phát hiện có vẻ đã bị bẻ khóa (root))
