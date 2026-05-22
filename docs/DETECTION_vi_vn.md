@@ -313,41 +313,46 @@ Cài đặt app từ Google Play Store hoặc Aurora Store
 
 ## Mã lỗi 15 (Phát hiện ứng dụng độc hại)
 
+**Link tham khảo:** <https://s.bshield.io/?code=15>
+
 Lỗi này xảy ra khi bạn dùng ứng dụng dùng có dấu hiệu độc hại trên thiết bị.
 
-**Link tham khảo:** <https://s.bshield.io/?code=15>
 **Cách khắc phục:**
 Tôi khuyên bạn nên rà soát lại ứng dụng đã cài đặt, nếu bạn muốn không gỡ ứng dụng mà chỉ muốn pass mã lỗi này thì xem lại Mã lỗi 3 (Phát hiện danh sách ứng dụng)
 
 ## Mã lỗi 16 (Bàn phím ảo không trong danh sách tin cậy)
 
+**Link tham khảo:** <https://s.bshield.io/?code=16>
+
 Lỗi này xảy ra khi bạn dùng ứng dụng bàn phím bên thứ 3 không nằm trong danh sách tin cậy của BShield
 
-**Link tham khảo:** <https://s.bshield.io/?code=16>
 **Cách khắc phục:**
 Tôi khuyên bạn nên dùng bàn phím đến từ nhà phát hành tin cậy như GBoard từ Google
 
 ## Mã lỗi 17 (Ứng dụng cài trong hồ sơ công việc)
 
+**Link tham khảo:** <https://s.bshield.io/?code=17>
+
 Lỗi này xảy ra khi bạn cài ứng dụng trong hồ sơ công việc
 
-**Link tham khảo:** <https://s.bshield.io/?code=17>
 **Cách khắc phục:**
 Cài đặt lại ứng dụng ngoài hồ sơ công việc
 
 ## Mã lỗi 18 (Đang dùng nhập liệu mô phỏng)
 
+**Link tham khảo:** <https://s.bshield.io/?code=18>
+
 Lỗi này xảy ra khi bạn dùng nhập liệu mô phỏng cho ứng dụng
 
-**Link tham khảo:** <https://s.bshield.io/?code=18>
 **Cách khắc phục:**
 Đừng dùng nhập liệu mô phỏng bruh
 
 ## Mã lỗi 19 (Đang dùng chế độ proxy trên thiết bị)
 
+**Link tham khảo:** <https://s.bshield.io/?code=19>
+
 Lỗi này xảy ra khi bạn đang dùng proxy trong cài đặt SSID trong cài đặt Wi-fi
 
-**Link tham khảo:** <https://s.bshield.io/?code=19>
 **Cách khắc phục:**
 Tạm tắt proxy hoặc tốt nhất là không dùng
 
@@ -357,21 +362,25 @@ LMAO
 **Link tham khảo:** <https://s.bshield.io/?code=20>
 
 ## Mã lỗi 21 (Phát hiện có vẻ đã bị bẻ khóa (root))
+
 Xem Mã lỗi 5 (Phát hiện root)
+
 **Link tham khảo:** <https://s.bshield.io/?code=21>
 
 ## Mã lỗi 22 (Thiết bị của bạn có vẻ đã bị can thiệp hệ thống (hook))
 
+**Link tham khảo:** <https://s.bshield.io/?code=22>
+
 Lỗi này xảy ra khi bạn dùng module để hook (LSposed, Xposed)
 
-**Link tham khảo:** <https://s.bshield.io/?code=22>
 **Cách khắc phục:**
 Sử dụng bản LSPosed 2.0 chính thức (https://lsposed.zip) hoặc các bản fork của LSPosed như (Irena, IrenaX, Vector)
 
 ## Mã lỗi 23 (hiết bị đang kết nối VPN)
 
+**Link tham khảo:** <https://s.bshield.io/?code=23>
+
 Lỗi này xảy ra khi bạn đang kết nối đến VPN
 
-**Link tham khảo:** <https://s.bshield.io/?code=23>
 **Cách khắc phục:**
 Cài đặt [RuslanUC/NoVPNDetect](https://github.com/RuslanUC/NoVPNDetect), mở LSPosed và vào module NoVPNDetect chọn hook vào app đang detect VPN
