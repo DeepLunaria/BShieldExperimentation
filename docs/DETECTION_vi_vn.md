@@ -37,7 +37,7 @@ Tài liệu này liệt kê tất cả các cơ chế kiểm tra, phát hiện l
   - [Mã lỗi 20 (Ứng dụng không hỗ trợ hệ điều hành MacOS)](#mã-lỗi-20-ứng-dụng-không-hỗ-trợ-hệ-điều-hành-macos)
   - [Mã lỗi 21 (Phát hiện có vẻ đã bị bẻ khóa (root))](#mã-lỗi-21-phát-hiện-có-vẻ-đã-bị-bẻ-khóa-root)
   - [Mã lỗi 22 (Thiết bị của bạn có vẻ đã bị can thiệp hệ thống (hook))](#mã-lỗi-22-thiết-bị-của-bạn-có-vẻ-đã-bị-can-thiệp-hệ-thống-hook)
-  - [Mã lỗi 23 (hiết bị đang kết nối VPN)](#mã-lỗi-23-hiết-bị-đang-kết-nối-vpn)
+  - [Mã lỗi 23 (Thiết bị đang kết nối VPN)](#mã-lỗi-23-hiết-bị-đang-kết-nối-vpn)
 
 ## Mã lỗi 1 (Phát hiện ứng dụng đã bị chỉnh sửa)
 
@@ -396,7 +396,7 @@ Lỗi này xảy ra khi bạn dùng module để hook (LSposed, Xposed)
 **Cách khắc phục:**
 Sử dụng bản LSPosed 2.0 chính thức (<https://lsposed.zip>) hoặc các bản fork của LSPosed như (Irena, IrenaX, Vector)
 
-## Mã lỗi 23 (hiết bị đang kết nối VPN)
+## Mã lỗi 23 (Thiết bị đang kết nối VPN)
 
 **Link tham khảo:** <https://s.bshield.io/?code=23>
 
