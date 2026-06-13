@@ -1,4 +1,4 @@
-# BSheild Experimentation (BSE)
+# BShield Experimentation (BSE)
 
 This project is used for researching and testing the detections implemented by BShield for their Android mobile application.
 
