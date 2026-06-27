@@ -301,7 +301,7 @@ Hoặc cách tốt nhất: không bật Developer Mode khi không sử dụng.
 
 Lỗi này xảy ra khi bạn dùng ROM custom trên thiết bị.
 
-Hiện tại chỉ mới có duy nhất app FPT Shop là check thêm cái này (<https://play.google.com/store/apps/details?id=vn.frt.fptshop.app&hl=vi>)
+Hiện tại có app FPT Shop, NCB iziMobile, MyVIB là check thêm cái này (<https://play.google.com/store/apps/details?id=vn.frt.fptshop.app&hl=vi>)
 
 **Cách khắc phục:**
 Cài đặt [JingMatrix/TEESimulator](https://github.com/JingMatrix/TEESimulator), thêm tên gói vào `target.txt`:

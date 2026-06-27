@@ -301,7 +301,7 @@ Or preferably, simply disable Developer Mode when not needed.
 
 This error occurs when using a custom ROM on the device.
 
-Currently, only the FPT Shop app additionally checks this (<https://play.google.com/store/apps/details?id=vn.frt.fptshop.app&hl=vi>)
+Currently, FPT Shop, NCB iziMobile, and MyVIB app additionally checks this (<https://play.google.com/store/apps/details?id=vn.frt.fptshop.app&hl=vi>)
 
 **Fix:**
 Install [JingMatrix/TEESimulator](https://github.com/JingMatrix/TEESimulator), then add the package name to `target.txt`.
