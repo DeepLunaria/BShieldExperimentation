@@ -4,7 +4,7 @@ Simple module to pass BShield in VNeID, Techcombank...
 
 ## Notes
 
-- It's only hide and remove some sysstem props that detected by BShield
+- It's only hide and remove some system props that detected by BShield
 - This module not hiding advanced things like zygisk or something
 - If you see your BShield protected app not working, please check [docs/DETECTION.md](../docs/DETECTION.md)
 - It maybe overrided by some features in android like adb root if you use
