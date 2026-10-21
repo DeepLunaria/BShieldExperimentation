@@ -8,37 +8,42 @@ This document lists all known BShield security checks and detection mechanisms o
 **Table of Contents:**
 
 <!-- TOC -->
-- [JNI Crash in A16 QPR1 device or newer version (app immediately crash)](#jni-crash-in-a16-qpr1-device-or-newer-version-app-immediately-crash)
-- [Error Code 1 (Modified Application Detected)](#error-code-1-modified-application-detected)
-- [Error Code 2 (Virtual Machine / Emulator Detected)](#error-code-2-virtual-machine--emulator-detected)
-- [Error Code 3 (Application List Detection and PIF inject by KOW)](#error-code-3-application-list-detection-and-pif-inject-by-kow)
-- [Error Code 4 (Debug Tool Detection, Rare)](#error-code-4-debug-tool-detection-rare)
-- [Error Code 5 (Root Detection)](#error-code-5-root-detection)
-  - [System Properties](#system-properties)
-  - [Injected Memory Map Detection](#injected-memory-map-detection)
-  - [Kernel Enforcing Status](#kernel-enforcing-status)
-  - [Root Manager Package Name Detection](#root-manager-package-name-detection)
-  - [Custom Launcher Modification Module Detection](#custom-launcher-modification-module-detection)
-  - [Bootloader Unlock Check](#bootloader-unlock-check)
-  - [Suspicious Mounts](#suspicious-mounts)
-  - [[UNCONFIRMED] KSU/AP Module Proc Image Loop Detection](#unconfirmed-ksuap-module-proc-image-loop-detection)
-- [Error Code 6 (Unlocked Bootloader Detected) Currently Unused or Possibly Merged into Code 5 Bootloader Check](#error-code-6-unlocked-bootloader-detected-currently-unused-or-possibly-merged-into-code-5-bootloader-check)
-- [Error Code 7 (Suspicious Application Detected) Rarely Appears](#error-code-7-suspicious-application-detected-rarely-appears)
-- [Error Code 8 (Application Running in a Different Space Than the Original Device Space)](#error-code-8-application-running-in-a-different-space-than-the-original-device-space)
-- [Error Code 10 (ADB Debug Mode Detected)](#error-code-10-adb-debug-mode-detected)
-- [Error Code 11 (Developer Mode Detected)](#error-code-11-developer-mode-detected)
-- [Error Code 12 (Custom ROM Detected)](#error-code-12-custom-rom-detected)
-- [Error Code 13 (Accessibility Service Running Detected)](#error-code-13-accessibility-service-running-detected)
-- [Error Code 14 (Application Installed from Unknown Source Detected)](#error-code-14-application-installed-from-unknown-source-detected)
-- [Error Code 15 (Malicious Application Detected)](#error-code-15-malicious-application-detected)
-- [Error Code 16 (Virtual Keyboard Not in Trusted List)](#error-code-16-virtual-keyboard-not-in-trusted-list)
-- [Error Code 17 (Application Installed in Work Profile)](#error-code-17-application-installed-in-work-profile)
-- [Error Code 18 (Simulated Input Detected)](#error-code-18-simulated-input-detected)
-- [Error Code 19 (Proxy Mode Enabled on Device)](#error-code-19-proxy-mode-enabled-on-device)
-- [Error Code 20 (Application Does Not Support MacOS)](#error-code-20-application-does-not-support-macos)
-- [Error Code 21 (Possible Root Compromise Detected)](#error-code-21-possible-root-compromise-detected)
-- [Error Code 22 (System Hook Detected)](#error-code-22-system-hook-detected)
-- [Error Code 23 (VPN Connection Detected)](#error-code-23-vpn-connection-detected)
+
+- [Compilation of BShield Security Checks & Detection Mechanisms on Android](#compilation-of-bshield-security-checks--detection-mechanisms-on-android)
+  - [JNI Crash in A16 QPR1 device or newer version (app immediately crash)](#jni-crash-in-a16-qpr1-device-or-newer-version-app-immediately-crash)
+  - [Error Code 1 (Modified Application Detected)](#error-code-1-modified-application-detected)
+  - [Error Code 2 (Virtual Machine / Emulator Detected)](#error-code-2-virtual-machine--emulator-detected)
+  - [Error Code 3 (Application List Detection and PIF inject by KOW)](#error-code-3-application-list-detection-and-pif-inject-by-kow)
+  - [Error Code 4 (Debug Tool Detection, Rare)](#error-code-4-debug-tool-detection-rare)
+  - [Error Code 5 (Root Detection)](#error-code-5-root-detection)
+    - [System Properties](#system-properties)
+    - [Injected Memory Map Detection](#injected-memory-map-detection)
+    - [Kernel Enforcing Status](#kernel-enforcing-status)
+    - [Root Manager Package Name Detection](#root-manager-package-name-detection)
+    - [Custom Launcher Modification Module Detection](#custom-launcher-modification-module-detection)
+    - [Bootloader Unlock Check](#bootloader-unlock-check)
+    - [Suspicious Mounts](#suspicious-mounts)
+    - [[UNCONFIRMED] KSU/AP Module Proc Image Loop Detection](#unconfirmed-ksuap-module-proc-image-loop-detection)
+  - [Error Code 6 (Unlocked Bootloader Detected) Currently Unused or Possibly Merged into Code 5 Bootloader Check](#error-code-6-unlocked-bootloader-detected-currently-unused-or-possibly-merged-into-code-5-bootloader-check)
+  - [Error Code 7 (Suspicious Application Detected) Rarely Appears](#error-code-7-suspicious-application-detected-rarely-appears)
+  - [Error Code 8 (Application Running in a Different Space Than the Original Device Space)](#error-code-8-application-running-in-a-different-space-than-the-original-device-space)
+  - [Error Code 10 (ADB Debug Mode Detected)](#error-code-10-adb-debug-mode-detected)
+  - [Error Code 11 (Developer Mode Detected)](#error-code-11-developer-mode-detected)
+  - [Error Code 12 (Custom ROM Detected)](#error-code-12-custom-rom-detected)
+    - [Mechanism](#mechanism)
+    - [Workaround](#workaround)
+  - [Error Code 13 (Accessibility Service Running Detected)](#error-code-13-accessibility-service-running-detected)
+  - [Error Code 14 (Application Installed from Unknown Source Detected)](#error-code-14-application-installed-from-unknown-source-detected)
+  - [Error Code 15 (Malicious Application Detected)](#error-code-15-malicious-application-detected)
+  - [Error Code 16 (Virtual Keyboard Not in Trusted List)](#error-code-16-virtual-keyboard-not-in-trusted-list)
+  - [Error Code 17 (Application Installed in Work Profile)](#error-code-17-application-installed-in-work-profile)
+  - [Error Code 18 (Simulated Input Detected)](#error-code-18-simulated-input-detected)
+  - [Error Code 19 (Proxy Mode Enabled on Device)](#error-code-19-proxy-mode-enabled-on-device)
+  - [Error Code 20 (Application Does Not Support MacOS)](#error-code-20-application-does-not-support-macos)
+  - [Error Code 21 (Possible Root Compromise Detected)](#error-code-21-possible-root-compromise-detected)
+  - [Error Code 22 (System Hook Detected)](#error-code-22-system-hook-detected)
+  - [Error Code 23 (VPN Connection Detected)](#error-code-23-vpn-connection-detected)
+
 <!-- /TOC -->
 
 ## JNI Crash in A16 QPR1 device or newer version (app immediately crash)
@@ -328,10 +333,33 @@ Or preferably, simply disable Developer Mode when not needed.
 
 This error occurs when using a custom ROM on the device.
 
-**Fix:**
-Install [JingMatrix/TEESimulator](https://github.com/JingMatrix/TEESimulator), then add the package name to `target.txt`.
+### Mechanism
 
-Based on [FPT Night-Wolf team's suggestion](https://blogs.night-wolf.io/ai-assisted-on-rasp-analysis), it appears that code 12 also check for `ro.build.display.id` and `ro.build.keys` to see if any test keys. You can use our module as a temporary fix for this issues.
+First, it scan for /system, /product, /system_ext and /system/addon.d partition/folders to see if there's any lineage file for it
+
+You can check detection using these commands in termux
+
+```sh
+find /system -iname '*lineage*' 2>/dev/null
+find /product -iname '*lineage*' 2>/dev/null
+find /system_ext -iname '*lineage*' 2>/dev/null
+stat /system/addon.d
+```
+
+Second it also check for `ro.build.display.id` and `ro.build.keys` to see if any test keys ([FPT Night-Wolf team's suggestion](https://blogs.night-wolf.io/ai-assisted-on-rasp-analysis)).
+
+Third, we think it might check for bootloader state in your device
+
+
+### Workaround
+- Install [JingMatrix/TEESimulator](https://github.com/JingMatrix/TEESimulator), then add the package name to `target.txt`.
+- Install latest `simple_bshield_bypass_module`
+- For first mechanism, we currently have 2 workaround to tackle this:
+  - Method 1: With device have susfs support, you can install [BRENE](https://github.com/rrr333nnn333/BRENE/releases/latest) enable **Hide Custom ROM Paths** and **Hide /system/addon.d Path**. Note: If you still want to use `susfs4ksu-module` you might need to get the list from termux by the command in the [Mechanism](#mechanism) section above and add to SUS PATH LOOP
+  - Method 2: You can install `NoMount Bypass for BShield` module with [NoMount](https://github.com/maxsteeel/nomount/releases/latest) module installed and working
+
+For non-susfs and non-nomount users, we're working on a zygisk workaround but it might closed source for an amount of time for stable release, this will like TreatWheel situation. 
+
 
 ## Error Code 13 (Accessibility Service Running Detected)
 

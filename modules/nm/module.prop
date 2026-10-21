@@ -1,0 +1,6 @@
+id=nm_bypass_for_bshield
+name=NoMount Bypass for BSHield
+version=v1
+versionCode=1
+author=RainyXeon, nleloc, gnadgnaoh (XES)
+description=This module is used to bypass BSHield code 12 in nomount platform

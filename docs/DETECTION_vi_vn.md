@@ -8,37 +8,42 @@ Tài liệu này liệt kê tất cả các cơ chế kiểm tra, phát hiện l
 **Mục lục:**
 
 <!-- TOC -->
-- [JNI bị Crash ở những phiên bản Android 16 QPR1 hoặc mới hơn (app bị đóng ngay lập tức)](#jni-bị-crash-ở-những-phiên-bản-android-16-qpr1-hoặc-mới-hơn-app-bị-đóng-ngay-lập-tức)
-- [Mã lỗi 1 (Phát hiện ứng dụng đã bị chỉnh sửa)](#mã-lỗi-1-phát-hiện-ứng-dụng-đã-bị-chỉnh-sửa)
-- [Mã lỗi 2 (Phát hiện cài đặt trên máy ảo, giả lập)](#mã-lỗi-2-phát-hiện-cài-đặt-trên-máy-ảo-giả-lập)
-- [Mã lỗi 3 (Phát hiện danh sách ứng dụng và PIF Inject của KOW và META module)](#mã-lỗi-3-phát-hiện-danh-sách-ứng-dụng-và-pif-inject-của-kow)
-- [Mã lỗi 4 (Phát hiện công cụ debug, hiếm)](#mã-lỗi-4-phát-hiện-công-cụ-debug-hiếm)
-- [Mã lỗi 5 (Phát hiện root)](#mã-lỗi-5-phát-hiện-root)
-  - [Đặc tính hệ thống](#đặc-tính-hệ-thống)
-  - [Phát hiện bộ nhớ map đã bị injected](#phát-hiện-bộ-nhớ-map-đã-bị-injected)
-  - [Trạng thái Enforcing của Kernel](#trạng-thái-enforcing-của-kernel)
-  - [Phát hiện tên gói của trình quản lý root](#phát-hiện-tên-gói-của-trình-quản-lý-root)
-  - [Phát hiện dùng module thay đổi launcher tùy chỉnh](#phát-hiện-dùng-module-thay-đổi-launcher-tùy-chỉnh)
-  - [Kiểm tra bootloader có unlock hay không](#kiểm-tra-bootloader-có-unlock-hay-không)
-  - [Mount đáng ngờ](#mount-đáng-ngờ)
-  - [[CHƯA XÁC NHẬN] Phát hiện vòng lặp image proc của module KSU/AP](#chưa-xác-nhận-phát-hiện-vòng-lặp-image-proc-của-module-ksuap)
-- [Mã lỗi 6 (Phát hiện bootloader mở khóa) hiện tại không sử dụng hoặc có thể đã đưa vào chung code 5 mục Kiểm tra bootloader](#mã-lỗi-6-phát-hiện-bootloader-mở-khóa-hiện-tại-không-sử-dụng-hoặc-có-thể-đã-đưa-vào-chung-code-5-mục-kiểm-tra-bootloader)
-- [Mã lỗi 7 (Phát hiện ứng dụng đáng ngờ) hiếm khi xuất hiện](#mã-lỗi-7-phát-hiện-ứng-dụng-đáng-ngờ-hiếm-khi-xuất-hiện)
-- [Mã lỗi 8 (Phát hiện ứng dụng đang được chạy ở chế độ không gian khác khác với không gian gốc của máy)](#mã-lỗi-8-phát-hiện-ứng-dụng-đang-được-chạy-ở-chế-độ-không-gian-khác-khác-với-không-gian-gốc-của-máy)
-- [Mã lỗi 10 (Phát hiện chế độ debug ADB)](#mã-lỗi-10-phát-hiện-chế-độ-debug-adb)
-- [Mã lỗi 11 (Phát hiện chế độ nhà phát triển)](#mã-lỗi-11-phát-hiện-chế-độ-nhà-phát-triển)
-- [Mã lỗi 12 (Phát hiện thiết bị đang sử dụng ROM tùy chỉnh)](#mã-lỗi-12-phát-hiện-thiết-bị-đang-sử-dụng-rom-tùy-chỉnh)
-- [Mã lỗi 13 (Phát hiện thiết bị đang chạy dịch vụ trợ năng đang chạy)](#mã-lỗi-13-phát-hiện-thiết-bị-đang-chạy-dịch-vụ-trợ-năng-đang-chạy)
-- [Mã lỗi 14 (Phát hiện ứng dụng cài từ nguồn không xác định)](#mã-lỗi-14-phát-hiện-ứng-dụng-cài-từ-nguồn-không-xác-định)
-- [Mã lỗi 15 (Phát hiện ứng dụng độc hại)](#mã-lỗi-15-phát-hiện-ứng-dụng-độc-hại)
-- [Mã lỗi 16 (Bàn phím ảo không trong danh sách tin cậy)](#mã-lỗi-16-bàn-phím-ảo-không-trong-danh-sách-tin-cậy)
-- [Mã lỗi 17 (Ứng dụng cài trong hồ sơ công việc)](#mã-lỗi-17-ứng-dụng-cài-trong-hồ-sơ-công-việc)
-- [Mã lỗi 18 (Đang dùng nhập liệu mô phỏng)](#mã-lỗi-18-đang-dùng-nhập-liệu-mô-phỏng)
-- [Mã lỗi 19 (Đang dùng chế độ proxy trên thiết bị)](#mã-lỗi-19-đang-dùng-chế-độ-proxy-trên-thiết-bị)
-- [Mã lỗi 20 (Ứng dụng không hỗ trợ hệ điều hành MacOS)](#mã-lỗi-20-ứng-dụng-không-hỗ-trợ-hệ-điều-hành-macos)
-- [Mã lỗi 21 (Phát hiện có vẻ đã bị bẻ khóa (root))](#mã-lỗi-21-phát-hiện-có-vẻ-đã-bị-bẻ-khóa-root)
-- [Mã lỗi 22 (Thiết bị của bạn có vẻ đã bị can thiệp hệ thống (hook))](#mã-lỗi-22-thiết-bị-của-bạn-có-vẻ-đã-bị-can-thiệp-hệ-thống-hook)
-- [Mã lỗi 23 (Thiết bị đang kết nối VPN)](#mã-lỗi-23-thiết-bị-đang-kết-nối-vpn)
+
+- [Tổng hợp những kiểm tra, phát hiện lỗ hổng bảo mật của BShield trên Android](#t%E1%BB%95ng-h%E1%BB%A3p-nh%E1%BB%AFng-ki%E1%BB%83m-tra-ph%C3%A1t-hi%E1%BB%87n-l%E1%BB%97-h%E1%BB%95ng-b%E1%BA%A3o-m%E1%BA%ADt-c%E1%BB%A7a-bshield-tr%C3%AAn-android)
+  - [JNI bị Crash ở những phiên bản Android 16 QPR1 hoặc mới hơn (app bị đóng ngay lập tức)](#jni-b%E1%BB%8B-crash-%E1%BB%9F-nh%E1%BB%AFng-phi%C3%AAn-b%E1%BA%A3n-android-16-qpr1-ho%E1%BA%B7c-m%E1%BB%9Bi-h%C6%A1n-app-b%E1%BB%8B-%C4%91%C3%B3ng-ngay-l%E1%BA%ADp-t%E1%BB%A9c)
+  - [Mã lỗi 1 (Phát hiện ứng dụng đã bị chỉnh sửa)](#m%C3%A3-l%E1%BB%97i-1-ph%C3%A1t-hi%E1%BB%87n-%E1%BB%A9ng-d%E1%BB%A5ng-%C4%91%C3%A3-b%E1%BB%8B-ch%E1%BB%89nh-s%E1%BB%ADa)
+  - [Mã lỗi 2 (Phát hiện cài đặt trên máy ảo, giả lập)](#m%C3%A3-l%E1%BB%97i-2-ph%C3%A1t-hi%E1%BB%87n-c%C3%A0i-%C4%91%E1%BA%B7t-tr%C3%AAn-m%C3%A1y-%E1%BA%A3o-gi%E1%BA%A3-l%E1%BA%ADp)
+  - [Mã lỗi 3 (Phát hiện danh sách ứng dụng và PIF Inject của KOW)](#m%C3%A3-l%E1%BB%97i-3-ph%C3%A1t-hi%E1%BB%87n-danh-s%C3%A1ch-%E1%BB%A9ng-d%E1%BB%A5ng-v%C3%A0-pif-inject-c%E1%BB%A7a-kow)
+  - [Mã lỗi 4 (Phát hiện công cụ debug, hiếm)](#m%C3%A3-l%E1%BB%97i-4-ph%C3%A1t-hi%E1%BB%87n-c%C3%B4ng-c%E1%BB%A5-debug-hi%E1%BA%BFm)
+  - [Mã lỗi 5 (Phát hiện root)](#m%C3%A3-l%E1%BB%97i-5-ph%C3%A1t-hi%E1%BB%87n-root)
+    - [Đặc tính hệ thống](#%C4%91%E1%BA%B7c-t%C3%ADnh-h%E1%BB%87-th%E1%BB%91ng)
+    - [Phát hiện bộ nhớ map đã bị injected](#ph%C3%A1t-hi%E1%BB%87n-b%E1%BB%99-nh%E1%BB%9B-map-%C4%91%C3%A3-b%E1%BB%8B-injected)
+    - [Trạng thái Enforcing của Kernel](#tr%E1%BA%A1ng-th%C3%A1i-enforcing-c%E1%BB%A7a-kernel)
+    - [Phát hiện tên gói của trình quản lý root](#ph%C3%A1t-hi%E1%BB%87n-t%C3%AAn-g%C3%B3i-c%E1%BB%A7a-tr%C3%ACnh-qu%E1%BA%A3n-l%C3%BD-root)
+    - [Phát hiện dùng module thay đổi launcher tùy chỉnh](#ph%C3%A1t-hi%E1%BB%87n-d%C3%B9ng-module-thay-%C4%91%E1%BB%95i-launcher-t%C3%B9y-ch%E1%BB%89nh)
+    - [Kiểm tra bootloader có unlock hay không](#ki%E1%BB%83m-tra-bootloader-c%C3%B3-unlock-hay-kh%C3%B4ng)
+    - [Mount đáng ngờ](#mount-%C4%91%C3%A1ng-ng%E1%BB%9D)
+    - [[CHƯA XÁC NHẬN] Phát hiện vòng lặp image proc của module KSU/AP](#ch%C6%B0a-x%C3%A1c-nh%E1%BA%ADn-ph%C3%A1t-hi%E1%BB%87n-v%C3%B2ng-l%E1%BA%B7p-image-proc-c%E1%BB%A7a-module-ksuap)
+  - [Mã lỗi 6 (Phát hiện bootloader mở khóa) hiện tại không sử dụng hoặc có thể đã đưa vào chung code 5 mục Kiểm tra bootloader](#m%C3%A3-l%E1%BB%97i-6-ph%C3%A1t-hi%E1%BB%87n-bootloader-m%E1%BB%9F-kh%C3%B3a-hi%E1%BB%87n-t%E1%BA%A1i-kh%C3%B4ng-s%E1%BB%AD-d%E1%BB%A5ng-ho%E1%BA%B7c-c%C3%B3-th%E1%BB%83-%C4%91%C3%A3-%C4%91%C6%B0a-v%C3%A0o-chung-code-5-m%E1%BB%A5c-ki%E1%BB%83m-tra-bootloader)
+  - [Mã lỗi 7 (Phát hiện ứng dụng đáng ngờ) hiếm khi xuất hiện](#m%C3%A3-l%E1%BB%97i-7-ph%C3%A1t-hi%E1%BB%87n-%E1%BB%A9ng-d%E1%BB%A5ng-%C4%91%C3%A1ng-ng%E1%BB%9D-hi%E1%BA%BFm-khi-xu%E1%BA%A5t-hi%E1%BB%87n)
+  - [Mã lỗi 8 (Phát hiện ứng dụng đang được chạy ở chế độ không gian khác khác với không gian gốc của máy)](#m%C3%A3-l%E1%BB%97i-8-ph%C3%A1t-hi%E1%BB%87n-%E1%BB%A9ng-d%E1%BB%A5ng-%C4%91ang-%C4%91%C6%B0%E1%BB%A3c-ch%E1%BA%A1y-%E1%BB%9F-ch%E1%BA%BF-%C4%91%E1%BB%99-kh%C3%B4ng-gian-kh%C3%A1c-kh%C3%A1c-v%E1%BB%9Bi-kh%C3%B4ng-gian-g%E1%BB%91c-c%E1%BB%A7a-m%C3%A1y)
+  - [Mã lỗi 10 (Phát hiện chế độ debug ADB)](#m%C3%A3-l%E1%BB%97i-10-ph%C3%A1t-hi%E1%BB%87n-ch%E1%BA%BF-%C4%91%E1%BB%99-debug-adb)
+  - [Mã lỗi 11 (Phát hiện chế độ nhà phát triển)](#m%C3%A3-l%E1%BB%97i-11-ph%C3%A1t-hi%E1%BB%87n-ch%E1%BA%BF-%C4%91%E1%BB%99-nh%C3%A0-ph%C3%A1t-tri%E1%BB%83n)
+  - [Mã lỗi 12 (Phát hiện thiết bị đang sử dụng ROM tùy chỉnh)](#m%C3%A3-l%E1%BB%97i-12-ph%C3%A1t-hi%E1%BB%87n-thi%E1%BA%BFt-b%E1%BB%8B-%C4%91ang-s%E1%BB%AD-d%E1%BB%A5ng-rom-t%C3%B9y-ch%E1%BB%89nh)
+    - [Cơ chế](#c%C6%A1-ch%E1%BA%BF)
+    - [Cách khắc phục tạm thời (Workaround)](#c%C3%A1ch-kh%E1%BA%AFc-ph%E1%BB%A5c-t%E1%BA%A1m-th%E1%BB%9Di-workaround)
+  - [Mã lỗi 13 (Phát hiện thiết bị đang chạy dịch vụ trợ năng đang chạy)](#m%C3%A3-l%E1%BB%97i-13-ph%C3%A1t-hi%E1%BB%87n-thi%E1%BA%BFt-b%E1%BB%8B-%C4%91ang-ch%E1%BA%A1y-d%E1%BB%8Bch-v%E1%BB%A5-tr%E1%BB%A3-n%C4%83ng-%C4%91ang-ch%E1%BA%A1y)
+  - [Mã lỗi 14 (Phát hiện ứng dụng cài từ nguồn không xác định)](#m%C3%A3-l%E1%BB%97i-14-ph%C3%A1t-hi%E1%BB%87n-%E1%BB%A9ng-d%E1%BB%A5ng-c%C3%A0i-t%E1%BB%AB-ngu%E1%BB%93n-kh%C3%B4ng-x%C3%A1c-%C4%91%E1%BB%8Bnh)
+  - [Mã lỗi 15 (Phát hiện ứng dụng độc hại)](#m%C3%A3-l%E1%BB%97i-15-ph%C3%A1t-hi%E1%BB%87n-%E1%BB%A9ng-d%E1%BB%A5ng-%C4%91%E1%BB%99c-h%E1%BA%A1i)
+  - [Mã lỗi 16 (Bàn phím ảo không trong danh sách tin cậy)](#m%C3%A3-l%E1%BB%97i-16-b%C3%A0n-ph%C3%ADm-%E1%BA%A3o-kh%C3%B4ng-trong-danh-s%C3%A1ch-tin-c%E1%BA%ADy)
+  - [Mã lỗi 17 (Ứng dụng cài trong hồ sơ công việc)](#m%C3%A3-l%E1%BB%97i-17-%E1%BB%A9ng-d%E1%BB%A5ng-c%C3%A0i-trong-h%E1%BB%93-s%C6%A1-c%C3%B4ng-vi%E1%BB%87c)
+  - [Mã lỗi 18 (Đang dùng nhập liệu mô phỏng)](#m%C3%A3-l%E1%BB%97i-18-%C4%91ang-d%C3%B9ng-nh%E1%BA%ADp-li%E1%BB%87u-m%C3%B4-ph%E1%BB%8Fng)
+  - [Mã lỗi 19 (Đang dùng chế độ proxy trên thiết bị)](#m%C3%A3-l%E1%BB%97i-19-%C4%91ang-d%C3%B9ng-ch%E1%BA%BF-%C4%91%E1%BB%99-proxy-tr%C3%AAn-thi%E1%BA%BFt-b%E1%BB%8B)
+  - [Mã lỗi 20 (Ứng dụng không hỗ trợ hệ điều hành MacOS)](#m%C3%A3-l%E1%BB%97i-20-%E1%BB%A9ng-d%E1%BB%A5ng-kh%C3%B4ng-h%E1%BB%97-tr%E1%BB%A3-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-macos)
+  - [Mã lỗi 21 (Phát hiện có vẻ đã bị bẻ khóa (root))](#m%C3%A3-l%E1%BB%97i-21-ph%C3%A1t-hi%E1%BB%87n-c%C3%B3-v%E1%BA%BB-%C4%91%C3%A3-b%E1%BB%8B-b%E1%BA%BB-kh%C3%B3a-root)
+  - [Mã lỗi 22 (Thiết bị của bạn có vẻ đã bị can thiệp hệ thống (hook))](#m%C3%A3-l%E1%BB%97i-22-thi%E1%BA%BFt-b%E1%BB%8B-c%E1%BB%A7a-b%E1%BA%A1n-c%C3%B3-v%E1%BA%BB-%C4%91%C3%A3-b%E1%BB%8B-can-thi%E1%BB%87p-h%E1%BB%87-th%E1%BB%91ng-hook)
+  - [Mã lỗi 23 (Thiết bị đang kết nối VPN)](#m%C3%A3-l%E1%BB%97i-23-thi%E1%BA%BFt-b%E1%BB%8B-%C4%91ang-k%E1%BA%BFt-n%E1%BB%91i-vpn)
+
 <!-- /TOC -->
 
 ## JNI bị Crash ở những phiên bản Android 16 QPR1 hoặc mới hơn (app bị đóng ngay lập tức)
@@ -328,10 +333,31 @@ Hoặc cách tốt nhất: không bật Developer Mode khi không sử dụng.
 
 Lỗi này xảy ra khi bạn dùng ROM custom trên thiết bị.
 
-**Cách khắc phục:**
-Cài đặt [JingMatrix/TEESimulator](https://github.com/JingMatrix/TEESimulator), thêm tên gói vào `target.txt`:
+### Cơ chế
 
-Dựa vào [nghiên cứu của team FPT Night-Wolf](https://blogs.night-wolf.io/ai-assisted-on-rasp-analysis), ta biết được rằng mã 12 còn kiểm tra thêm `ro.build.display.id` và `ro.build.keys` xem có chứa `test-keys` không. Bạn có thể dùng module của chúng tôi như một cách tạm thời sửa lỗi này.
+Trước hết, BShield quét các thư mục / phân vùng như `/system`, `/system_ext` và `/product` để  kiểm tra xem có thư mục, tệp tin lineage nào không
+
+Bạn có thể kiểm tra qua những lệnh này trên termux như sau:
+
+```sh
+find /system -iname '*lineage*' 2>/dev/null
+find /product -iname '*lineage*' 2>/dev/null
+find /system_ext -iname '*lineage*' 2>/dev/null
+stat /system/addon.d
+```
+
+Tiếp theo, BShield kiểm tra xem `ro.build.display.id` và `ro.build.keys` xem có test-key nào ko ([Theo gợi ý của nhóm FPT Night-Wolf](https://blogs.night-wolf.io/ai-assisted-on-rasp-analysis)).
+
+Cuối cùng, BShield kiểm tra xem trạng thái trình khởi động có mở hay không.
+
+### Cách khắc phục tạm thời (Workaround)
+- Cài đặt [JingMatrix/TEESimulator](https://github.com/JingMatrix/TEESimulator), sau đó thêm tên package vào file `target.txt`.
+- Cài đặt bản mới nhất của `simple_bshield_bypass_module`
+- Đối với cơ chế đầu tiên, hiện tại chúng ta có 2 cách khắc phục:
+  - Phương pháp 1: Đối với thiết bị có hỗ trợ susfs, bạn có thể cài đặt BRENE và bật Hide Custom ROM Paths cùng Hide /system/addon.d Path. Lưu ý: Nếu bạn vẫn muốn sử dụng susfs4ksu-module, bạn có thể cần lấy danh sách từ termux bằng lệnh trong mục Cơ chế (Mechanism) ở trên và thêm vào SUS PATH LOOP.
+  - Phương pháp 2: Bạn có thể cài đặt module NoMount Bypass for BShield cùng với việc cài đặt và khởi chạy thành công module NoMount.
+
+Đối với người dùng không sử dụng susfs hay nomount, chúng tôi đang phát triển một giải pháp tạm thời qua zygisk. Tuy nhiên, nó có thể sẽ là mã nguồn đóng trong một khoảng thời gian cho đến khi có bản phát hành ổn định, tương tự như trường hợp của TreatWheel.
 
 ## Mã lỗi 13 (Phát hiện thiết bị đang chạy dịch vụ trợ năng đang chạy)
 
