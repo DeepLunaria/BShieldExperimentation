@@ -16,17 +16,17 @@ com.vnid
 UID_LIST=""
 
 # get exposed file list
-EXPOSE=$( {
-    find /system -iname '*lineage*' 2>/dev/null
-    find /product -iname '*lineage*' 2>/dev/null
-    find /system_ext -iname '*lineage*' 2>/dev/null
-} )
+EXPOSE=$(find /system /product /system_ext -iname '*lineage*' -prune -print 2>/dev/null)
+
+[ -e /system/addon.d ] && EXPOSE="/system/addon.d
+$EXPOSE"
 
 until cmd package list packages >/dev/null 2>&1; do sleep 1; done
 
 # get uid list
+PKG_LIST=$(cmd package list packages -U)
 for pkg in $HIDE_FROM; do
-    app_uid=$(cmd package list packages -U | sed -n "s/^package:$pkg uid://p")
+    app_uid=$(echo "$PKG_LIST" | sed -n "s/^package:$pkg uid://p")
     [ -n "$app_uid" ] && UID_LIST="$UID_LIST $app_uid"
 done
 
@@ -35,11 +35,8 @@ done
 [ -z "$EXPOSE" ] && exit 0
 
 for uid in $UID_LIST; do
-    #     $NM_BIN rule add --whiteout "/system/addon.d" --uid "$uid"
-    #     ^^ this might not be useful for now
-
     while read -r file; do
-        $NM_BIN rule add --whiteout "$file" --uid "$uid"
+        [ -n "$file" ] && $NM_BIN rule add --whiteout "$file" --uid "$uid"
     done <<EOF
 $EXPOSE
 EOF
