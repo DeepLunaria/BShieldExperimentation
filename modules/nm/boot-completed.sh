@@ -16,7 +16,9 @@ com.vnid
 UID_LIST=""
 
 # get exposed file list
-EXPOSE=$(find /system /product /system_ext -iname '*lineage*' -prune -print 2>/dev/null)
+EXPOSE=$(find /system /product /system_ext /vendor \
+    \( -iname '*lineage*' -o -iname '*crdroid*' \) \
+    -prune -print 2>/dev/null)
 
 [ -e /system/addon.d ] && EXPOSE="/system/addon.d
 $EXPOSE"
